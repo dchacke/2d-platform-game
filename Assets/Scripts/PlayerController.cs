@@ -18,23 +18,32 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float input = Input.GetAxis("Horizontal");
-        Vector3 movement = Vector3.right * input;
-
-        transform.Translate(movement * speed * Time.deltaTime);
-
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            isGrounded = false;
-
-            // TODO: This would be better in FixedUpdate, but Input.GetKeyDown
-            // seems lossy there.
-            rb.AddForce(Vector3.up * jumpForce);
-        }
+        Move();
+        Jump();
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
         isGrounded = other.collider.CompareTag("Ground");
+    }
+
+    void Move()
+    {
+        float input = Input.GetAxis("Horizontal");
+        Vector3 movement = Vector3.right * input;
+
+        transform.Translate(movement * speed * Time.deltaTime);
+    }
+
+    void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            isGrounded = false;
+
+            // TODO: Since we're using physics, this would be better placed
+            // in FixedUpdate, but Input.GetKeyDown seems lossy there.
+            rb.AddForce(Vector3.up * jumpForce);
+        }
     }
 }
