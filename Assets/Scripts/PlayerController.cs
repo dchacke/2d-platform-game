@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     float speed = 10;
     float jumpForce = 400;
+    bool isGrounded = false;
     Rigidbody2D rb;
 
     // Start is called before the first frame update
@@ -22,11 +23,18 @@ public class PlayerController : MonoBehaviour
 
         transform.Translate(movement * speed * Time.deltaTime);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
+            isGrounded = false;
+
             // TODO: This would be better in FixedUpdate, but Input.GetKeyDown
             // seems lossy there.
             rb.AddForce(Vector3.up * jumpForce);
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        isGrounded = other.collider.CompareTag("Ground");
     }
 }
