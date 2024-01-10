@@ -24,15 +24,9 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("Collider");
-
         if (other.collider.CompareTag("Ground"))
         {
             Jump();
-        }
-        else
-        {
-            Debug.Log("other");
         }
     }
 
