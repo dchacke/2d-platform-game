@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     float speed = 10;
     float jumpForce = 400;
-    bool isGrounded = false;
     bool facingRight = true;
     Rigidbody2D rb;
 
@@ -21,12 +20,14 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Rotate();
-        Jump();
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        isGrounded = other.collider.CompareTag("Ground");
+        if (other.collider.CompareTag("Ground"))
+        {
+            Jump();
+        }
     }
 
     void Move()
@@ -50,13 +51,8 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            isGrounded = false;
-
-            // TODO: Since we're using physics, this would be better placed
-            // in FixedUpdate, but Input.GetKeyDown seems lossy there.
-            rb.AddForce(Vector3.up * jumpForce);
-        }
+        // TODO: Since we're using physics, this would be better placed
+        // in FixedUpdate, but Input.GetKeyDown seems lossy there.
+        rb.AddForce(Vector3.up * jumpForce);
     }
 }
