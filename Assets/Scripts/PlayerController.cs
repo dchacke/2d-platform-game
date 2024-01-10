@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     float speed = 10;
     float jumpForce = 400;
     bool isGrounded = false;
+    bool facingRight = true;
     Rigidbody2D rb;
 
     // Start is called before the first frame update
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Move();
+        Rotate();
         Jump();
     }
 
@@ -32,7 +34,18 @@ public class PlayerController : MonoBehaviour
         float input = Input.GetAxis("Horizontal");
         Vector3 movement = Vector3.right * input;
 
-        transform.Translate(movement * speed * Time.deltaTime);
+        transform.Translate(movement * speed * Time.deltaTime, Space.World);
+    }
+
+    void Rotate()
+    {
+        float input = Input.GetAxis("Horizontal");
+
+        if (input < 0 && facingRight || input > 0 && !facingRight)
+        {
+            transform.Rotate(0, 180, 0);
+            facingRight = !facingRight;
+        }
     }
 
     void Jump()
