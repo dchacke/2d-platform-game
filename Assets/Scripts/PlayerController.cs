@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         float input = Input.GetAxis("Horizontal");
-        Vector3 movement = Vector3.right * input;
+        Vector2 movement = Vector2.right * input;
 
         transform.Translate(movement * speed * Time.deltaTime, Space.World);
     }
@@ -65,6 +65,6 @@ public class PlayerController : MonoBehaviour
     {
         // TODO: Since we're using physics, this would be better placed
         // in FixedUpdate, but Input.GetKeyDown seems lossy there.
-        rb.AddForce(Vector3.up * jumpForce);
+        rb.AddForce(Vector2.up * jumpForce);
     }
 }
