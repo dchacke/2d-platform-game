@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float leftBound;
     public float rightBound;
+    public float highestY;
 
     float speed = 10;
     float jumpForce = 400;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
         Move();
         ConstrainMovement();
         Rotate();
+        TrackHighestY();
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -59,6 +61,11 @@ public class PlayerController : MonoBehaviour
             transform.Rotate(0, 180, 0);
             facingRight = !facingRight;
         }
+    }
+
+    void TrackHighestY()
+    {
+        highestY = Mathf.Max(highestY, transform.position.y);
     }
 
     void Jump()
