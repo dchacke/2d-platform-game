@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public float leftBound;
+    public float rightBound;
+
     float speed = 10;
     float jumpForce = 400;
     bool facingRight = true;
@@ -19,6 +22,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Move();
+        ConstrainMovement();
         Rotate();
     }
 
@@ -36,6 +40,14 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = Vector3.right * input;
 
         transform.Translate(movement * speed * Time.deltaTime, Space.World);
+    }
+
+    void ConstrainMovement()
+    {
+        transform.position = new Vector2(
+            Mathf.Clamp(transform.position.x, leftBound, rightBound),
+            transform.position.y
+        );
     }
 
     void Rotate()
