@@ -10,8 +10,7 @@ public class Platform : MonoBehaviour
     float width;
     float height;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         width = GetComponent<SpriteRenderer>().bounds.size.x;
         height = GetComponent<SpriteRenderer>().bounds.size.y;
@@ -20,20 +19,11 @@ public class Platform : MonoBehaviour
         SpawnSpikes();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void SpawnCherry()
     {
         if (Random.Range(0.0f, 1.0f) < 0.2f)
         {
-            float x = Random.Range(transform.position.x - width / 2, transform.position.x + width / 2);
-            float y = transform.position.y + height + 0.25f;
-
-            Vector3 pos = new Vector3(x, y, 0);
+            Vector3 pos = RandomSpawnPos() + new Vector3(0, 0.25f, 0);
 
             Instantiate(cherryPrefab, pos, cherryPrefab.transform.rotation);
         }
@@ -43,12 +33,18 @@ public class Platform : MonoBehaviour
     {
         if (Random.Range(0.0f, 1.0f) < 1f)
         {
-            float x = Random.Range(transform.position.x - width / 2, transform.position.x + width / 2);
-            float y = transform.position.y + height - 0.05f;
-
-            Vector3 pos = new Vector3(x, y, 0);
+            Vector3 pos = RandomSpawnPos() + new Vector3(0, -0.05f, 0);
 
             Instantiate(spikesPrefab, pos, cherryPrefab.transform.rotation);
         }
+    }
+
+    Vector3 RandomSpawnPos()
+    {
+        return new Vector3(
+            Random.Range(transform.position.x - width / 2, transform.position.x + width / 2),
+            transform.position.y + height,
+            0
+        );
     }
 }
