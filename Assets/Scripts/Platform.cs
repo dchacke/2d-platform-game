@@ -23,7 +23,7 @@ public class Platform : MonoBehaviour
     {
         if (Random.Range(0.0f, 1.0f) < 0.2f)
         {
-            Vector3 pos = RandomSpawnPos() + new Vector3(0, 0.25f, 0);
+            Vector2 pos = RandomSpawnPos() + new Vector2(0, 0.25f);
 
             Instantiate(cherryPrefab, pos, cherryPrefab.transform.rotation);
         }
@@ -33,20 +33,19 @@ public class Platform : MonoBehaviour
     {
         if (Random.Range(0.0f, 1.0f) < 1f)
         {
-            Vector3 pos = RandomSpawnPos() + new Vector3(0, -0.05f, 0);
+            Vector2 pos = RandomSpawnPos() + new Vector2(0, -0.05f);
 
             Instantiate(spikesPrefab, pos, cherryPrefab.transform.rotation);
         }
     }
 
-    Vector3 RandomSpawnPos()
+    Vector2 RandomSpawnPos()
     {
         float xOffset = 0.15f;
 
-        return new Vector3(
+        return new Vector2(
             Random.Range(transform.position.x - width / 2 + xOffset, transform.position.x + width / 2 - xOffset),
-            transform.position.y + height,
-            0
+            transform.position.y + height
         );
     }
 }
