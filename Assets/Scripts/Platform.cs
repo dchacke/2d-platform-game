@@ -31,7 +31,7 @@ public class Platform : MonoBehaviour
 
     void SpawnSpikes()
     {
-        if (Random.Range(0.0f, 1.0f) < 1f)
+        if (Random.Range(0.0f, 1.0f) < 0.1f)
         {
             Vector2 pos = RandomSpawnPos() + new Vector2(0, -0.05f);
 
