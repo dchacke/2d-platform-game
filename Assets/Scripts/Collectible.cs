@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
-    private GameManager gm;
+    GameManager gm;
+
+    [SerializeField] AudioClip collectSound;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +18,9 @@ public class Collectible : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            // As per https://stackoverflow.com/a/36407104/1371131
+            AudioSource.PlayClipAtPoint(collectSound, transform.position);
+
             Destroy(gameObject);
             gm.IncCherryCount();
         }
