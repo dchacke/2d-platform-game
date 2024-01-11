@@ -3655,6 +3655,7 @@ MonoBehaviour:
   highscoreDisplay: {fileID: 889119882}
   platformPrefab: {fileID: 1242962872132449073, guid: 7b1f0d6167ccd413d9e03f72b4675c97, type: 3}
   gameOverScreen: {fileID: 662302712}
+  IsGameOver: 0
 --- !u!4 &2076023444
 Transform:
   m_ObjectHideFlags: 0
