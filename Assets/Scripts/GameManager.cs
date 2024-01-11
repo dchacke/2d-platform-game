@@ -7,7 +7,9 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI cherryCountDisplay;
     [SerializeField] GameObject platformPrefab;
+    [SerializeField] GameObject gameOverScreen;
 
+    GameObject player;
     PlayerController pc;
 
     float highestY = 0;
@@ -28,10 +30,16 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        pc = GameObject.Find("Player").GetComponent<PlayerController>();
+        player = GameObject.Find("Player");
+        pc = player.GetComponent<PlayerController>();
 
         SpawnSeedPlatforms();
         InvokeRepeating("SpawnPlatform", 0, 1);
+    }
+
+    void Update()
+    {
+        CheckGameOver();
     }
 
     public void IncCherryCount()
@@ -53,5 +61,13 @@ public class GameManager : MonoBehaviour
         int padding = 2;
         Vector3 pos = new Vector3(Random.Range(pc.leftBound + padding, pc.rightBound - padding), highestY, 0);
         GameObject platform = Instantiate(platformPrefab, pos, platformPrefab.transform.rotation);
+    }
+
+    void CheckGameOver()
+    {
+        if (player.transform.position.y < pc.highestY - 20)
+        {
+            gameOverScreen.SetActive(true);
+        }
     }
 }
