@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameManager : MonoBehaviour
@@ -35,11 +36,7 @@ public class GameManager : MonoBehaviour
 
         SpawnSeedPlatforms();
         InvokeRepeating("SpawnPlatform", 0, 1);
-    }
-
-    void Update()
-    {
-        CheckGameOver();
+        InvokeRepeating("CheckGameOver", 0, 2);
     }
 
     public void IncCherryCount()
@@ -68,6 +65,14 @@ public class GameManager : MonoBehaviour
         if (player.transform.position.y < pc.highestY - 20)
         {
             gameOverScreen.SetActive(true);
+            StartCoroutine("RestartScene");
         }
+    }
+
+    IEnumerator RestartScene()
+    {
+        yield return new WaitForSeconds(2);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
