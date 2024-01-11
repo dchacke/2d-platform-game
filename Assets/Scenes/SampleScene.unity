@@ -1185,6 +1185,7 @@ MonoBehaviour:
   rightBound: 9
   highestY: 0
   jumpSound: {fileID: 8300000, guid: 70748a9a5514bf945a8e9e0ffb51172d, type: 3}
+  hurtSound: {fileID: 8300000, guid: bc5979cfa11596f409035ec11da31999, type: 3}
 --- !u!50 &681937265
 Rigidbody2D:
   serializedVersion: 4
