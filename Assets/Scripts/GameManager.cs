@@ -7,6 +7,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI cherryCountDisplay;
+    [SerializeField] TextMeshProUGUI highscoreDisplay;
     [SerializeField] GameObject platformPrefab;
     [SerializeField] GameObject gameOverScreen;
 
@@ -14,6 +15,8 @@ public class GameManager : MonoBehaviour
     PlayerController pc;
 
     float highestY = 0;
+
+    private static int Highscore = 0;
 
     private int cherryCount = 0;
     public int CherryCount
@@ -26,6 +29,12 @@ public class GameManager : MonoBehaviour
         {
             cherryCount = value;
             cherryCountDisplay.text = $"{value}";
+
+            if (value > Highscore)
+            {
+                Highscore = value;
+                DisplayHighscore();
+            }
         }
     }
 
@@ -34,6 +43,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.Find("Player");
         pc = player.GetComponent<PlayerController>();
 
+        DisplayHighscore();
         SpawnSeedPlatforms();
         InvokeRepeating("SpawnPlatform", 0, 1);
         InvokeRepeating("CheckGameOver", 0, 2);
@@ -74,5 +84,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    void DisplayHighscore()
+    {
+        highscoreDisplay.text = $"Highscore: {Highscore}";
     }
 }
