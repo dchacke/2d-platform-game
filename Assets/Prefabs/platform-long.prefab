@@ -165,6 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cherryPrefab: {fileID: 762045917784124312, guid: 6e3bc77ca2dad4d7fab319d206a800bc, type: 3}
+  spikesPrefab: {fileID: 4342684318577166264, guid: 89235ff1f34624a6c91de04042d51528, type: 3}
 --- !u!114 &5255409916698078219
 MonoBehaviour:
   m_ObjectHideFlags: 0
