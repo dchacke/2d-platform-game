@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
         ConstrainMovement();
         Rotate();
         TrackHighestY();
+        ConstrainSpeed();
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -73,5 +74,13 @@ public class PlayerController : MonoBehaviour
         // TODO: Since we're using physics, this would be better placed
         // in FixedUpdate, but Input.GetKeyDown seems lossy there.
         rb.AddForce(Vector2.up * jumpForce);
+    }
+
+    void ConstrainSpeed()
+    {
+        // Don't keep adding force when reaching multiple platforms
+        // in rapid succession.
+        // As per https://forum.unity.com/threads/add-force-with-limits.631552/#post-4250683
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, 10);
     }
 }
