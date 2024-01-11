@@ -13,12 +13,16 @@ public class PlayerController : MonoBehaviour
     bool facingRight = true;
     Rigidbody2D rb;
     GameManager gm;
+    AudioSource audioSource;
+
+    [SerializeField] AudioClip jumpSound;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         gm = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -80,6 +84,8 @@ public class PlayerController : MonoBehaviour
         // TODO: Since we're using physics, this would be better placed
         // in FixedUpdate, but Input.GetKeyDown seems lossy there.
         rb.AddForce(Vector2.up * jumpForce);
+
+        audioSource.PlayOneShot(jumpSound);
     }
 
     public bool IsAscending()
