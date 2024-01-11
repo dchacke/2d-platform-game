@@ -26,12 +26,11 @@ public class PlayerController : MonoBehaviour
         ConstrainMovement();
         Rotate();
         TrackHighestY();
-        ConstrainSpeed();
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.collider.CompareTag("Ground"))
+        if (other.collider.CompareTag("Ground") && !IsAscending())
         {
             Jump();
         }
@@ -76,11 +75,8 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(Vector2.up * jumpForce);
     }
 
-    void ConstrainSpeed()
+    bool IsAscending()
     {
-        // Don't keep adding force when reaching multiple platforms
-        // in rapid succession.
-        // As per https://forum.unity.com/threads/add-force-with-limits.631552/#post-4250683
-        rb.velocity = Vector3.ClampMagnitude(rb.velocity, 10);
+        return rb.velocity.y > 0;
     }
 }
