@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6457038823667625569}
   - component: {fileID: 3570835059686885543}
   - component: {fileID: 4549269758771227865}
+  - component: {fileID: 5255409916698078219}
   m_Layer: 0
   m_Name: platform-long
   m_TagString: Ground
@@ -164,3 +165,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cherryPrefab: {fileID: 762045917784124312, guid: 6e3bc77ca2dad4d7fab319d206a800bc, type: 3}
+--- !u!114 &5255409916698078219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242962872132449073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bc23db6bf512462ebb28e598c5e0ad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
