@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
 
     GameObject player;
     PlayerController pc;
+    AudioSource audioSource;
+
+    [SerializeField] AudioClip fallingSound;
 
     float highestY = 0;
     public bool IsGameOver = false;
@@ -43,6 +46,7 @@ public class GameManager : MonoBehaviour
     {
         player = GameObject.Find("Player");
         pc = player.GetComponent<PlayerController>();
+        audioSource = GetComponent<AudioSource>();
 
         DisplayHighscore();
         SpawnSeedPlatforms();
@@ -75,6 +79,7 @@ public class GameManager : MonoBehaviour
     {
         if (player.transform.position.y < pc.highestY - 20)
         {
+            audioSource.PlayOneShot(fallingSound);
             TriggerGameOver();
         }
     }
