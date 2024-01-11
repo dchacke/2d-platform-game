@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     PlayerController pc;
 
     float highestY = 0;
+    public bool IsGameOver = false;
 
     private static int Highscore = 0;
 
@@ -74,8 +75,7 @@ public class GameManager : MonoBehaviour
     {
         if (player.transform.position.y < pc.highestY - 20)
         {
-            gameOverScreen.SetActive(true);
-            StartCoroutine("RestartScene");
+            TriggerGameOver();
         }
     }
 
@@ -89,5 +89,12 @@ public class GameManager : MonoBehaviour
     void DisplayHighscore()
     {
         highscoreDisplay.text = $"Highscore: {Highscore}";
+    }
+
+    public void TriggerGameOver()
+    {
+        IsGameOver = true;
+        gameOverScreen.SetActive(true);
+        StartCoroutine("RestartScene");
     }
 }

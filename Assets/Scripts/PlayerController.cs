@@ -12,11 +12,13 @@ public class PlayerController : MonoBehaviour
     float jumpForce = 400;
     bool facingRight = true;
     Rigidbody2D rb;
+    GameManager gm;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        gm = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -30,7 +32,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.collider.CompareTag("Ground") && !IsAscending())
+        if (other.collider.CompareTag("Ground") && !IsAscending() && !gm.IsGameOver)
         {
             Jump();
         }
@@ -75,7 +77,7 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(Vector2.up * jumpForce);
     }
 
-    bool IsAscending()
+    public bool IsAscending()
     {
         return rb.velocity.y > 0;
     }
