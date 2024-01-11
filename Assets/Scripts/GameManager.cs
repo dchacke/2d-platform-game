@@ -17,9 +17,9 @@ public class GameManager : MonoBehaviour
     float highestY = 0;
     public bool IsGameOver = false;
 
-    private static int Highscore = 0;
+    static int Highscore = 0;
 
-    private int cherryCount = 0;
+    int cherryCount = 0;
     public int CherryCount
     {
         get
