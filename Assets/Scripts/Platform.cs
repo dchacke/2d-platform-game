@@ -41,8 +41,10 @@ public class Platform : MonoBehaviour
 
     Vector3 RandomSpawnPos()
     {
+        float xOffset = 0.15f;
+
         return new Vector3(
-            Random.Range(transform.position.x - width / 2, transform.position.x + width / 2),
+            Random.Range(transform.position.x - width / 2 + xOffset, transform.position.x + width / 2 - xOffset),
             transform.position.y + height,
             0
         );
